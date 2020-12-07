@@ -1,0 +1,24 @@
+.start{
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+}
+.card {
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+    border-width: 80%;
+}
+
+.answerChoice{
+    background-color: rgb(132, 169, 248);
+    border: black 1px solid; 
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+    width: 30rem;
+    height: 2rem;
+}
