@@ -1,6 +1,7 @@
 var mostRecentScore = localStorage.getItem("mostRecentScore");
 JSON.parse(mostRecentScore);
 console.log(mostRecentScore);
+localStorage.setItem(highScores, JSON.stringify(highScores));
 
 $(document).ready(function () {
 
@@ -17,13 +18,25 @@ $("#submit").on("click", function () {
         score: myScore
     }
 
-    highScores.push(scoreInput);
+    highScores.unshift(scoreInput);
+    console.log(highScores);
+
+    localStorage.setItem(highScores, JSON.stringify("highScores"));
+
+
+
+    for(var i = 0; i >= 5; i++){
+        $(".list-group-item").text(highScores[i].name + " scored " + highScores[1].score) + " %";
+    }
+    console.log(highScores);
+
+
 });
 
 
-var highScores = [{
-    name: "",
-    score: "",
-}, ]
 
-console.log(highScores);
+
+var highScores = []
+
+
+
