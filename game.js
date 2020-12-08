@@ -1,29 +1,29 @@
 $(document).ready(function () {
 
         //using an array of object for my question list
-        const questionList = [{
-            question: "Question with answer A",
-            answers: ["A", "B", "C", "D"],
+        var questionList = [{
+            question: "1 + 1",
+            answers: ["2", "5", "6", "8"],
             correctAnswer: "A"
         }, {
-            question: "Question with answer C",
-            answers: ["A", "B", "C", "D"],
+            question: "2 + 2",
+            answers: ["6", "1", "4", "9"],
             correctAnswer: "C"
         }, {
-            question: "Question with answer A",
-            answers: ["A", "B", "C", "D"],
+            question: "3 + 3",
+            answers: ["6", "0", "9", ".1"],
             correctAnswer: "A"
         }, {
-            question: "Question with answer D",
-            answers: ["A", "B", "C", "D"],
+            question: "4 + 4",
+            answers: ["0", "12", "1", "8"],
             correctAnswer: "D"
         }, {
-            question: "Question with answer D",
-            answers: ["A", "B", "C", "D"],
+            question: "5 + 5",
+            answers: ["1778", "1809", "4", "10"],
             correctAnswer: "D"
         }, {
-            question: "Question with answer B",
-            answers: ["A", "B", "C", "D"],
+            question: "6 + 6",
+            answers: ["1", "12", "34", "7"],
             correctAnswer: "B"
         }]
 
@@ -31,14 +31,39 @@ $(document).ready(function () {
         var maxScore = 100;
         var currentScore = 0;
         
+        // runs "startGame" on load
+        $(document).ready(function () {
+            startGame();
+        });
+
+        //resets the stats and time from last played and imediately renders next question
+        //this also resets the list of usable questions to the original array "questionList"
         function startGame(){
             currentScore = 0;
             usableQuestions = questionList;
             renderQuestion();   
         }
 
+        //upon answering a question, this will render a new question
+        //this will also assign a correct or incorrect class to either, which will be used in calculating the final score
+        $(".answerChoice").on("click", function () {
+            renderQuestion();
+
+        });
+
+        //creates a random number 1 - the length of the **usable question list and uses that number as the index of the question matrix
+        //I then assigned each question to a button and the question to the card above. 
         function renderQuestion(){
-            listIndex = Math.floor(Math.random * questionList.length);
-            currentQuestion = questionList[listIndex]
+            listIndex = Math.floor(Math.random() * usableQuestions.length);
+            currentQuestion = usableQuestions[listIndex];
+
+
+
+            $("#question").text(currentQuestion.question); 
+            $("#ac1").text(currentQuestion.answers[0]);  
+            $("#ac2").text(currentQuestion.answers[1]);
+            $("#ac3").text(currentQuestion.answers[2]);
+            $("#ac4").text(currentQuestion.answers[3]);    
+
         };
 });
