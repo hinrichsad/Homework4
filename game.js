@@ -32,6 +32,7 @@ $(document).ready(function () {
         var currentScore = 0;
         questionCount = 0;
         scorePer = maxScore/maxQuestion;
+        var count = 60
         
         // runs "startGame" on load
         $(document).ready(function () {
@@ -62,6 +63,9 @@ $(document).ready(function () {
                 console.log("Correct");
                 currentScore+= scorePer;
                 console.log(currentScore);
+            }else{
+                //subtracts 20 second for each mistake 
+                count = count - 20;
             }
             
             
@@ -93,4 +97,17 @@ $(document).ready(function () {
             $("#ac4").text(currentQuestion.answers[3]);    
 
         };
+
+        //basic 60 -> 0 countdown
+        $("#clock").text(count);
+
+        timer = setInterval(function() {
+            $("#clock").html(count--);
+            if(count <= 1){
+                clearInterval(timer);
+                window.location.href = "end.html"
+            } 
+        }, 1000);
+
+
 });
