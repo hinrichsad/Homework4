@@ -11,7 +11,7 @@ $(document).ready(function () {
             correctAnswer: "C"
         }, {
             question: "3 + 3",
-            answers: ["6", "0", "9", ".1"],
+            answers: ["6", "0", "9", "1"],
             correctAnswer: "A"
         }, {
             question: "4 + 4",
@@ -30,6 +30,8 @@ $(document).ready(function () {
         var maxQuestion = 4;
         var maxScore = 100;
         var currentScore = 0;
+        questionCount = 0;
+        scorePer = maxScore/maxQuestion;
         
         // runs "startGame" on load
         $(document).ready(function () {
@@ -45,19 +47,44 @@ $(document).ready(function () {
         }
 
         //upon answering a question, this will render a new question
-        //this will also assign a correct or incorrect class to either, which will be used in calculating the final score
-        $(".answerChoice").on("click", function () {
-            renderQuestion();
+        //checks for question count and uses an if/then to decide whether or not to render -> if not then reroute to end.html
+        //this will also read and interp. each answer as either correct or incorrect
+        $(".answerChoice").on("click", function (event) {
+            
+            var selected = event.target;
+            var selectedValue = $(selected).attr("value");
+
+            console.log(selectedValue);
+            console.log(questionList[listIndex].correctAnswer)
+
+            if(selectedValue == questionList[listIndex].correctAnswer){
+                
+                console.log("Correct");
+                currentScore+= scorePer;
+                console.log(currentScore);
+            }
+            
+            
+            if(questionCount < maxQuestion){
+                renderQuestion();
+                var mostRecentScore = currentScore;
+                console.log(mostRecentScore)
+            }else{
+                localStorage.setItem('mostRecentScore', JSON.stringify(currentScore));
+
+                window.location.href = "end.html";
+            }
 
         });
 
         //creates a random number 1 - the length of the **usable question list and uses that number as the index of the question matrix
+        //incriments questionCount by 1 each time
         //I then assigned each question to a button and the question to the card above. 
         function renderQuestion(){
             listIndex = Math.floor(Math.random() * usableQuestions.length);
             currentQuestion = usableQuestions[listIndex];
 
-
+            questionCount++;
 
             $("#question").text(currentQuestion.question); 
             $("#ac1").text(currentQuestion.answers[0]);  
