@@ -3,13 +3,12 @@
 var mostRecentScore = localStorage.getItem("mostRecentScore");
 JSON.parse(mostRecentScore);
 console.log(mostRecentScore);
-localStorage.setItem(highScores, JSON.stringify(highScores));
 
 $(document).ready(function () {
 
     $("#finalScore").text(mostRecentScore);
 
-});
+
 //takes input and saves the name and most recent score to local storage,
 //then turns them into an object and pushes them onto the previus Scores board
 
@@ -28,31 +27,26 @@ $("#submit").on("click", function () {
     highScores.unshift(scoreInput);
     console.log(highScores);
 
-    localStorage.setItem(highScores, JSON.stringify("highScores"));
 
-
-
-    for(var i = 0; i >= 5; i++){
-        $(".list-group-item").text(highScores[i].name + " scored " + highScores[1].score) + " %";
-    }
-    console.log(highScores);
-
-
+    storeObj();
+    returnToStart();
 });
 
+function storeObj(){
 
-function renderHighscoreList(){
-    var getName = localStorage.getItem("name");
-    var getMyScore = localStorage.getItem("myScore");
-
-    if (!getMyScore || !getName){
-        return
-    }
-    
-
+    localStorage.setItem('highScores', JSON.stringify(highScores));
 }
 
-var highScores = []
+$("#restart").on("click", function () {
+    storeObj();
+    returnToStart();
+});
 
+function returnToStart(){
+    window.location.href = "index.html";
+}
+var highScores = [];
 
+console.log(highScores);
 
+});
