@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    var highScores = [];
+
     function startGame(){
         currentScore = 0;
         usableQuestions = questionList;
@@ -11,7 +13,7 @@ $(document).ready(function () {
         
     });
 
-    var getScores = localStorage.getItem("highScores");
+    var getScores = localStorage.getItem('newBoard');
     JSON.parse(getScores);
 
     if(getScores !== null){
